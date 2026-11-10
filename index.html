@@ -84,7 +84,20 @@
     radial-gradient(60% 50% at 20% 30%,rgba(111,231,255,.16),transparent 60%),
     radial-gradient(50% 45% at 80% 20%,rgba(138,92,246,.22),transparent 60%),
     radial-gradient(40% 40% at 60% 80%,rgba(199,125,255,.10),transparent 60%);pointer-events:none}
-  .hero .wrap{position:relative}
+  .hero .wrap{position:relative;z-index:1}
+  /* behind-the-scenes photos, faded into the dark on the left and bottom */
+  .hero-bg{position:absolute;top:0;right:0;width:min(60%,1000px);height:clamp(560px,58vw,860px);display:flex;gap:0;pointer-events:none;z-index:0;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 22%,#000 60%),linear-gradient(180deg,#000 45%,transparent 100%);
+    -webkit-mask-composite:source-in;
+    mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 22%,#000 60%),linear-gradient(180deg,#000 45%,transparent 100%);
+    mask-composite:intersect}
+  .hero-bg img{flex:1 1 0;min-width:0;height:100%;object-fit:cover;opacity:.5;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);filter:saturate(.9) brightness(.82) contrast(1.05)}
+  .hero-bg img:nth-child(1){object-position:40% 50%}
+  .hero-bg img:nth-child(2){object-position:45% 40%;margin:0 -7%}
+  .hero-bg img:nth-child(3){object-position:35% 45%}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,7,.55),rgba(5,5,7,0) 30%)}
+  @media (max-width:820px){.hero-bg{width:100%;height:520px}.hero-bg img{opacity:.28}.hero-bg img:nth-child(3){display:none}
+    .hero-bg{-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 100%);mask-image:linear-gradient(180deg,#000 30%,transparent 100%)}}
   .hero .eyebrow{margin-bottom:22px}
   .hero h1{max-width:none;text-transform:uppercase;font-family:Inter,-apple-system,"SF Pro Display",system-ui,sans-serif;font-weight:800;font-size:clamp(38px,6vw,76px);letter-spacing:-.005em;line-height:1.06;text-wrap:balance}
   .hero h1 span{display:inline-block}
@@ -285,6 +298,11 @@
 </nav>
 
 <header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="assets/hero/hero-1.jpg" width="900" height="1136" alt="" fetchpriority="high">
+    <img src="assets/hero/hero-2.jpg" width="900" height="1472" alt="" fetchpriority="high">
+    <img src="assets/hero/hero-3.jpg" width="900" height="1208" alt="" fetchpriority="high">
+  </div>
   <div class="wrap">
     <div class="eyebrow rv">Melbourne · Short-form video for businesses</div>
     <h1 class="rv">You run the business.<br><span class="grad">We'll handle the content.</span></h1>
@@ -333,11 +351,12 @@
       <!-- Real tile: href = YouTube link (fallback), data-yt = video id (or data-video = a hosted .mp4 instead), data-ratio = the video's shape (16/9, 4/3, 9/16),
            data-preview = silent loop cut to the tile's shape, --ph = poster (the loop's first frame) in assets/work/ -->
       <a class="tile wide rv" href="https://youtube.com/shorts/iyEjmfMM40k" data-yt="iyEjmfMM40k" data-ratio="9/16" data-preview="assets/work/basic-respect-preview.mp4?v=3" style="--ph:url(assets/work/basic-respect.jpg?v=3) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>Basic Respect</b><span>Brand Shoot</span></div></a>
+      <a class="tile rv" href="https://youtu.be/QB9cEyiH0RM" data-yt="QB9cEyiH0RM" data-ratio="4/3" data-preview="assets/work/the-cook-out-preview.mp4?v=1" style="--ph:url(assets/work/the-cook-out.jpg?v=1) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>The Cook Out</b><span>Event</span></div></a>
       <a class="tile rv" href="https://youtu.be/bSxM4w5E1X8" data-yt="bSxM4w5E1X8" data-ratio="4/3" data-preview="assets/work/hex-fight-series-preview.mp4?v=4" style="--ph:url(assets/work/hex-fight-series.jpg?v=4) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>Hex Fight Series</b><span>Event</span></div></a>
       <a class="tile rv" href="https://youtu.be/QsSeueJxc6k" data-yt="QsSeueJxc6k" data-ratio="16/9" data-preview="assets/work/demolition-preview.mp4?v=1" style="--ph:url(assets/work/demolition.jpg?v=1) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>Demolition</b><span>Commercial</span></div></a>
       <a class="tile rv" href="https://youtube.com/shorts/1d4YmhAag6o" data-yt="1d4YmhAag6o" data-ratio="9/16" data-preview="assets/work/supreet-preview.mp4?v=2" style="--ph:url(assets/work/supreet.jpg?v=2) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>Supreet</b><span>Creator</span></div></a>
       <a class="tile rv" href="https://youtu.be/bH3M1wqguF0" data-yt="bH3M1wqguF0" data-ratio="4/3" data-preview="assets/work/asics-event-preview.mp4?v=1" style="--ph:url(assets/work/asics-event.jpg?v=1) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>ASICS</b><span>Event</span></div></a>
-      <a class="tile wide rv" href="assets/work/property.mp4" data-video="assets/work/property.mp4" data-ratio="16/9" data-preview="assets/work/property-preview.mp4?v=2" style="--ph:url(assets/work/property.jpg?v=2) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>Property</b><span>Property Shoot</span></div></a>
+      <a class="tile rv" href="assets/work/property.mp4" data-video="assets/work/property.mp4" data-ratio="16/9" data-preview="assets/work/property-tall-preview.mp4?v=1" style="--ph:url(assets/work/property-tall.jpg?v=1) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>Property</b><span>Property Shoot</span></div></a>
       <a class="tile rv" href="https://youtu.be/fYE_6FMirUQ" data-yt="fYE_6FMirUQ" data-ratio="4/3" data-preview="assets/work/julius-marlow-preview.mp4?v=1" style="--ph:url(assets/work/julius-marlow.jpg?v=1) 50% 50%/cover"><div class="ph"></div><div class="play"></div><div class="meta"><b>Julius Marlow</b><span>Event</span></div></a>
     </div>
     <div class="more rv"><a class="btn btn-ghost" href="https://www.instagram.com/pfx.media/" target="_blank" rel="noopener">See more on Instagram · @pfx.media</a></div>
